@@ -4,9 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var app = express();
 
 
@@ -16,8 +13,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//首页仪表盘
+app.use('/', require('./routes/index'));
+//用户路由
+app.use('/users', require('./routes/users'));
+//管理员路由
+app.use('/manager', require('./routes/manager'));
+//商品路由
+app.use('/product',require('./routes/product'));
+//订单管理
+app.use('/order',require('./routes/order'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
